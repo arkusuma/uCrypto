@@ -172,10 +172,10 @@ begin
     Hash := TSHA1.Create;
 
   Digest := Hash.Hash(Buffer, Length);
-  N1 := TBigNum.CreateBytesBE(Digest.Buffer, Digest.Length,0);
+  N1 := TBigNum.CreateBytesBE(Digest.Buffer, Digest.Length);
   N1.Mod_(FN);
 
-  N2 := TBigNum.CreateBytesBE(@Sig, SigLen,0);
+  N2 := TBigNum.CreateBytesBE(@Sig, SigLen);
   Encrypt(N2);
 
   N2.BitCount := Digest.Length * 8;

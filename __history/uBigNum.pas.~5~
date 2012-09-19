@@ -1,6 +1,6 @@
 unit uBigNum;
 
-// Fixed one bug and various IDE warnings. Ivan
+// Fixed one bug and various IDE warnings
 
 interface
 

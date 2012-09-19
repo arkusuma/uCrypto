@@ -1,7 +1,5 @@
 unit uBigNum;
 
-// Fixed one bug and various IDE warnings. Ivan
-
 interface
 
 uses
@@ -44,7 +42,7 @@ type
     constructor Create; overload;
     constructor Create(N: TBigNum); overload;
     constructor CreateBytes(B: PChar; Length: Integer);
-    constructor CreateBytesBE(B: PChar; Length: Integer;LeaveThisVarBlank : integer);
+    constructor CreateBytesBE(B: PChar; Length: Integer);
     constructor CreateDigit(X: TDigit);
 
     destructor Destroy; override;
@@ -528,12 +526,7 @@ begin
   CopyBytes(B, Length);
 end;
 
-// To get around the warning in the IDE for having two constructors and the issues
-// it causes with C++ (which i dont care about right now) I've simply added an extra
-// variable to the constructor that does nothing
-// See: http://docs.embarcadero.com/products/rad_studio/radstudio2007/RS2007_helpupdates/HUpdate4/EN/html/devcommon/cm_duplicate_ctor_dtor_xml.html
-// Ivan
-constructor TBigNum.CreateBytesBE(B: PChar; Length: Integer; LeaveThisVarBlank : integer);
+constructor TBigNum.CreateBytesBE(B: PChar; Length: Integer);
 begin
   Create;
   CopyBytesBE(B, Length);
