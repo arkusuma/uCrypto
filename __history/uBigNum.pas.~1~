@@ -1,11 +1,9 @@
 unit uBigNum;
 
-// Fixed one bug and various IDE warnings. Ivan
-
 interface
 
 uses
-  Classes, SysUtils, uRandomGenerator;
+  Classess, SysUtils, uRandomGenerator;
 
 type
   TDigit = Cardinal;
@@ -44,7 +42,7 @@ type
     constructor Create; overload;
     constructor Create(N: TBigNum); overload;
     constructor CreateBytes(B: PChar; Length: Integer);
-    constructor CreateBytesBE(B: PChar; Length: Integer;LeaveThisVarBlank : integer);
+    constructor CreateBytesBE(B: PChar; Length: Integer);
     constructor CreateDigit(X: TDigit);
 
     destructor Destroy; override;
@@ -99,8 +97,8 @@ type
 
     function ToHex: string;
     function ToBase64: string;
-    function ToString: string; overload; override;
-    function ToString(Radix: Integer): string; reintroduce; overload;
+    function ToString: string; overload;
+    function ToString(Radix: Integer): string; overload;
  
     procedure Clear;
 
@@ -317,8 +315,7 @@ end;
 { Precord Self >= N }
 procedure TBigNum.AbsSubShifted(N: TBigNum; P: Integer);
 var
-// Max : integer removed
-  I : Integer;
+  I, Max: Integer;
   Borrow, D1, D2: TDigit;
 begin
   if IsZero then
@@ -528,12 +525,7 @@ begin
   CopyBytes(B, Length);
 end;
 
-// To get around the warning in the IDE for having two constructors and the issues
-// it causes with C++ (which i dont care about right now) I've simply added an extra
-// variable to the constructor that does nothing
-// See: http://docs.embarcadero.com/products/rad_studio/radstudio2007/RS2007_helpupdates/HUpdate4/EN/html/devcommon/cm_duplicate_ctor_dtor_xml.html
-// Ivan
-constructor TBigNum.CreateBytesBE(B: PChar; Length: Integer; LeaveThisVarBlank : integer);
+constructor TBigNum.CreateBytesBE(B: PChar; Length: Integer);
 begin
   Create;
   CopyBytesBE(B, Length);
@@ -638,10 +630,7 @@ begin
   begin
     DivMod(N.Digit[0], R);
     if R <> nil then
-      R.FSign := FSign;
-      // Fixed what appeared to be bug. ivan
-      // Was: R.Sign := FSign but R.Sign is read only and getting its value from R.FSign anyway
-      //
+      R.Sign := FSign;
     FSign := FSign xor N.FSign;
     Exit;
   end;

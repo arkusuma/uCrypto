@@ -13,7 +13,7 @@ type
     function GetBytes(Index: Integer): Byte;
   public
     constructor Create(Buffer: PChar; Length: Integer);
-    function ToString: string; override;
+    function ToString: string;
     property Bytes[Index: Integer]: Byte read GetBytes; default;
     property Buffer: PChar read FBuffer;
     property Length: Integer read FLength;

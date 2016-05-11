@@ -1,7 +1,5 @@
 unit uBigNum;
 
-// Fixed one bug and various IDE warnings. Ivan
-
 interface
 
 uses
@@ -44,7 +42,7 @@ type
     constructor Create; overload;
     constructor Create(N: TBigNum); overload;
     constructor CreateBytes(B: PChar; Length: Integer);
-    constructor CreateBytesBE(B: PChar; Length: Integer;LeaveThisVarBlank : integer);
+    constructor CreateBytesBE(B: PChar; Length: Integer);
     constructor CreateDigit(X: TDigit);
 
     destructor Destroy; override;
